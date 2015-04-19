@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Testing Gllry library with sample gallery</title>
+        <script src="../../src/js/gllry.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../src/css/gllry.css">
+        <style>
+            .size{
+                width:600px;
+                height:400px;
+            }
+
+            .size img{
+                width:600px;
+            }
+        </style>
+        <script>
+            window.addEventListener('load', function(){
+                window.gllry = new Gllry('gllry', {breadcrumbs:true, autoPlay:3000, headings:true});
+            });
+        </script>
+    </head>
+    <body>
+        <div id="gllry" class="gllry size">
+            <ul>
+                <li>
+                    <img alt="Mallorca, Spain" src="https://farm6.staticflickr.com/5446/10002041966_a62d6099e1_k_d.jpg" />
+                </li>
+                <li>
+                    <img alt="Chris and the waterfall" src="https://farm9.staticflickr.com/8327/8081113068_6c6abbf81b_c.jpg" />
+                </li>
+                <li>
+                    <img alt="Aurora loop" src="https://farm9.staticflickr.com/8459/8070488682_da57691dee_b.jpg" />
+                </li>
+                <li>
+                    <img alt="Blue Ridge Mountains" src="https://farm4.staticflickr.com/3954/15500280740_c69f8db02d_b.jpg" />
+                </li>
+                <li>
+                    <img alt="no more home / paris." src="https://farm4.staticflickr.com/3739/10997371946_360cfb0c27_h_d.jpg" />
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
