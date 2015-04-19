@@ -15,23 +15,11 @@
         this.max = this.items.length;
 
         if(options.breadcrumbs){
-            this.breadcrumbs = document.createElement('ul');
-            this.breadcrumbs.classList.add('breadcrumbs');
-            for(var i=0; i<this.images.length; i++){
-                var li = document.createElement('li');
-                li.setAttribute('data-index', i);
-                this.breadcrumbs.appendChild(li);
-            }
+            this.setBreadcrumbs();
+        }
 
-            this.gllry.appendChild(this.breadcrumbs);
-
-            this.breadcrumbs.addEventListener('click', function(e){
-                var index = e.target.getAttribute('data-index');
-
-                if(index !== void 0 && index !== null){
-                    self.go(index);
-                }
-            });
+        if(options.headings){
+            this.setHeading();
         }
 
         this.setCurrent();
@@ -106,6 +94,32 @@
         }
     };
 
+    Gllry.prototype.setBreadcrumbs = function(){
+        var self = this;
+
+        this.breadcrumbs = document.createElement('ul');
+        this.breadcrumbs.classList.add('breadcrumbs');
+        for(var i=0; i<this.images.length; i++){
+            var li = document.createElement('li');
+            li.setAttribute('data-index', i);
+            this.breadcrumbs.appendChild(li);
+        }
+
+        this.gllry.appendChild(this.breadcrumbs);
+
+        this.breadcrumbs.addEventListener('click', function(e){
+            var index = e.target.getAttribute('data-index');
+
+            if(index !== void 0 && index !== null){
+                self.go(index);
+            }
+        });
+    };
+
+    Gllry.prototype.setHeading = function(){
+
+    };
+
     Gllry.prototype.setCurrent = function(){
         if(this.gllry.querySelector('.current')){ this.gllry.querySelector('.current').classList.remove('current');}
         if(this.gllry.querySelector('.next')){ this.gllry.querySelector('.next').classList.remove('next');}
@@ -125,7 +139,7 @@
     Gllry.prototype.autoPlay = function(){
         var self = this;
         setInterval(function(){
-
+            self.goNext();
         }, this.options.autoPlay);
     };
 
