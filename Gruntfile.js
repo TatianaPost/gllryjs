@@ -3,26 +3,26 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        clean: {
+            options: {
+                force: true
+            },
+            dist: [ 'gllry.min.js', 'gllry.min.css' ]
+        },
         copy: {
             dist: {
                 files: [
                     {
                         src: [
-                            'app/templates/dist/index.html'
+                            'src/js/gllry.min.js'
                         ],
-                        dest: 'dist/index.html'
+                        dest: 'gllry.min.js'
                     },
                     {
-                        expand: true,
-                        cwd: 'app/fonts/',
-                        src: '*',
-                        dest: 'dist/fonts/'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'app/images/',
-                        src: '*',
-                        dest: 'dist/images/'
+                        src: [
+                            'src/css/gllry.min.css'
+                        ],
+                        dest: 'gllry.min.css'
                     }
                 ]
             }
@@ -47,25 +47,29 @@ module.exports = function(grunt) {
             app: {
                 options: {
                     sourceMap: true,
-                    sourceMapName: 'dist/js/app.map'
+                    sourceMapName: 'gllry.map'
                 },
                 files: {
-                    'dist/js/app.min.js': ['app/js/app/**/*.js']
+                    'gllry.min.js': ['src/js/*.js']
                 }
-            },
-            libs: {
-                options: {
-                    sourceMap: true,
-                    sourceMapName: 'dist/js/vendor.map'
-                },
-                files: {
-                    'dist/js/vendor.min.js': ['app/js/libs/*js']
-                }
+            }
+        },
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: './',
+                    ext: '.css'
+                }]
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -74,4 +78,5 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('server',['connect', 'watch']);
+    grunt.registerTask('dist',['clean', 'uglify', 'cssmin']);
 };
