@@ -2,6 +2,7 @@
     function Gllry(id, options){
         var self = this;
 
+        this.touch = window.ontouchdown ? 'touchdown' : 'click';
         this.current = 0;
         this.next = 1;
         this.max = void 0;
@@ -27,6 +28,10 @@
         if(options.autoPlay){
             this.autoPlay();
         }
+
+        this.gllry.addEventListener(this.touch, function(e){
+            self.goNext();
+        });
     }
 
     Gllry.prototype.go = function(current){
@@ -117,7 +122,10 @@
     };
 
     Gllry.prototype.setHeading = function(){
+        this.heading = document.createElement('span');
+        this.heading.classList.add('heading');
 
+        this.gllry.appendChild(this.heading);
     };
 
     Gllry.prototype.setCurrent = function(){
@@ -134,6 +142,10 @@
         }
 
         this.breadcrumbs.children[this.current].classList.add('current');
+
+        if(this.heading){
+            this.heading.innerHTML = this.items[this.current].querySelector('img').getAttribute('alt');
+        }
     }
 
     Gllry.prototype.autoPlay = function(){

@@ -58,10 +58,23 @@
             .gllry ul.breadcrumbs li.current{
                 opacity:.9;
             }
+
+            .gllry span{
+                position: absolute;
+                display: inline-block;
+                bottom: 30px;
+                width: 100%;
+                padding: 5px;
+                font-size: 16px;
+                color: #fff;
+                height: 40px;
+                background: rgba(0,0,0,.3);
+                z-index: 4;
+            }
         </style>
         <script>
             window.addEventListener('load', function(){
-                window.gllry = new Gllry('gllry', {breadcrumbs:true, autoPlay:3000});
+                window.gllry = new Gllry('gllry', {breadcrumbs:true, autoPlay:3000, headings:true});
             });
         </script>
     </head>
