@@ -15,7 +15,16 @@
         </style>
         <script>
             window.addEventListener('load', function(){
-                window.gllry = new Gllry('gllry', {breadcrumbs:true, autoPlay:3000, headings:true});
+                window.gllry = new Gllry('gllry', {
+                        breadcrumbs:true,
+                        autoPlay:3000,
+                        headings:true,
+                        action: {
+                            text: 'Signup',
+                            callback: function(){alert('signup');},
+                            timeout:0
+                    }
+                });
             });
         </script>
     </head>

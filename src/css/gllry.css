@@ -28,7 +28,7 @@
     width:100%;
     height:30px;
     position:absolute;
-    bottom:10px;
+    bottom:5px;
     z-index:5;
     text-align:right;
 }
@@ -53,10 +53,32 @@
     display: inline-block;
     bottom: 0%;
     width: 100%;
-    padding: 5px;
+    padding: 10px;
     font-size: 16px;
     color: #fff;
-    height: 40px;
+    height: 30px;
     background: rgba(0,0,0,.3);
     z-index: 4;
+}
+
+.gllry button.action{
+    width:auto;
+    height:45px;
+    padding:0 20px;
+    font-size:16px;
+    background:rgba(0,0,0,.6);
+    color:#fff;
+    position: absolute;
+    top:10px;
+    right:10px;
+    border:solid 0px #fff;
+    z-index:5;
+    text-transform: uppercase;
+    opacity:0;
+    -webkit-transition:opacity .2s ease-out;
+    transition:opacity .2s ease-out;
+}
+
+.gllry button.action.show{
+    opacity:1;
 }

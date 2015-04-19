@@ -1,4 +1,6 @@
 (function(){
+    var DEFAULT_TEXT = 'Close';
+
     function Gllry(id, options){
         var self = this;
 
@@ -27,6 +29,10 @@
 
         if(options.autoPlay){
             this.autoPlay();
+        }
+
+        if(options.action){
+            this.setAction();
         }
 
         this.gllry.addEventListener(this.touch, function(e){
@@ -129,9 +135,12 @@
     };
 
     Gllry.prototype.setCurrent = function(){
+        var self = this;
+
         if(this.gllry.querySelector('.current')){ this.gllry.querySelector('.current').classList.remove('current');}
         if(this.gllry.querySelector('.next')){ this.gllry.querySelector('.next').classList.remove('next');}
         if(this.breadcrumbs.querySelector('.current')) this.breadcrumbs.querySelector('.current').classList.remove('current');
+        if(this.actionButton) this.actionButton.classList.remove('show');
 
         if(this.items[this.current]){
             this.items[this.current].classList.add('current');
@@ -146,7 +155,23 @@
         if(this.heading){
             this.heading.innerHTML = this.items[this.current].querySelector('img').getAttribute('alt');
         }
-    }
+
+        if(this.options.action){
+            setTimeout(function(){
+                self.actionButton.classList.add('show');
+            }, this.options.action.timeout || 0);
+        }
+    };
+
+    Gllry.prototype.setAction = function(){
+        this.actionButton = document.createElement('button');
+
+        this.actionButton.innerHTML = this.options.action.text || DEFAULT_TEXT;
+        this.actionButton.addEventListener('click', this.options.action.callback);
+        this.actionButton.classList.add('action');
+
+        this.gllry.appendChild(this.actionButton);
+    };
 
     Gllry.prototype.autoPlay = function(){
         var self = this;
