@@ -180,5 +180,13 @@
         }, this.options.autoPlay);
     };
 
+    Gllry.prototype.hide = function(){
+        this.gllry.classList.add('hidden');
+    };
+
+    Gllry.prototype.show = function(){
+        this.gllry.classList.remove('hidden');
+    };
+
     window.Gllry = Gllry;
 }());
