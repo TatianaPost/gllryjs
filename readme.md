@@ -1,6 +1,6 @@
-#Gllry
+#gllryjs
 
-Gllry is a simple html/javascript library for visualising images in a gallery mode with some nice extensions:
+gllryjs is a simple html/javascript library for visualising images in photo slides mode with some nice extensions:
 
     - breadcrumbs to track current image and easy access to specified slide
     - keyboard shortcuts for prev/next slide *
