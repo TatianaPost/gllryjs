@@ -21,6 +21,13 @@
 
 .gllry li.current{
     z-index:202;
+    opacity: 1;
+}
+
+.gllry li.current.fade{
+    transition: opacity .4s ease-out;
+    -webkit-transition: opacity .4s ease-out;
+    opacity: 0;
 }
 
 .gllry li.next{
