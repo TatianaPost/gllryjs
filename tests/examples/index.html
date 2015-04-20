@@ -4,25 +4,25 @@
         <script src="../../src/js/gllry.js"></script>
         <link rel="stylesheet" type="text/css" href="../../src/css/gllry.css">
         <style>
-            .size{
+            .size, .gllry ul.size{
                 width:600px;
                 height:400px;
-            }
-
-            .size img{
-                width:600px;
             }
         </style>
         <script>
             window.addEventListener('load', function(){
                 window.gllry = new Gllry('gllry', {
-                        breadcrumbs:true,
+                        breadcrumbs:{
+                            position:'bottom-center'
+                        },
+                        fullscreen:false,
                         autoPlay:3000,
                         headings:true,
                         action: {
                             text: 'Signup',
                             callback: function(){gllry.hide()},
-                            timeout:0
+                            timeout:0,
+                            position:'bottom-center'
                         },
                         animate:true
                 });
