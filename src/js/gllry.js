@@ -4,7 +4,8 @@
     function Gllry(id, options){
         var self = this;
 
-        this.touch = window.ontouchdown ? 'touchdown' : 'click';
+        this.touchstart = 'ontouchstart' in window ? 'touchstart' : 'click';
+        this.touchend = 'ontouchend' in window ? 'touchend' : 'click';
         this.current = 0;
         this.next = 1;
         this.max = void 0;
@@ -41,8 +42,18 @@
             this.setAction();
         }
 
-        this.gllry.addEventListener(this.touch, function(e){
-            self.goNext();
+        var touchstartPos = null;
+        this.gllry.addEventListener(this.touchstart, function(e){
+            touchstartPos = e.touches[0].clientX;
+        });
+
+        this.gllry.addEventListener(this.touchend, function(e){
+            if(e.changedTouches[0].clientX <= touchstartPos){
+                self.goNext();
+            }
+            else{
+                self.goPrev();
+            }
         });
     }
 
@@ -137,7 +148,7 @@
             var index = e.target.getAttribute('data-index');
 
             if(index !== void 0 && index !== null){
-                self.go(index);
+                //self.go(index);
             }
         });
     };
