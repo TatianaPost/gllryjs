@@ -44,11 +44,12 @@
 
         var touchstartPos = null;
         this.gllry.addEventListener(this.touchstart, function(e){
-            touchstartPos = e.touches[0].clientX;
+            touchstartPos = e.touches ? e.touches[0].clientX: e.clientX;
         });
 
         this.gllry.addEventListener(this.touchend, function(e){
-            if(e.changedTouches[0].clientX <= touchstartPos){
+            touchEndPos = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+            if(touchEndPos <= touchstartPos){
                 self.goNext();
             }
             else{
@@ -234,6 +235,10 @@
         this.interval = setTimeout(function(){
             self.goNext();
         }, this.options.autoPlay);
+    };
+
+    Gllry.prototype.fullscreen = function(){
+        this.gllry.classList.toggle('fullscreen');
     };
 
     Gllry.prototype.hide = function(){
