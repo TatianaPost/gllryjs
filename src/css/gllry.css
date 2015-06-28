@@ -82,7 +82,7 @@
 
 .gllry ul.breadcrumbs{
     width:100%;
-    height:10px;
+    height:18px;
     position:absolute;
     bottom:5px;
     z-index:205;
@@ -186,6 +186,8 @@
     background:transparent;
     height:100%;
     position:static;
+    -webkit-transform: none;
+    transform: none;
 }
 
 .gllry ul.nav_buttons li:before,.gllry ul.nav_buttons li:after{
