@@ -3,8 +3,8 @@
     var ANIMATION_CLASS = 'fade';
 //    ANIMATION_CLASS = 'slide';
 
-    ANIMATION_BACK = 'back';
-    ANIMATION_FWD = 'fwd';
+    ANIMATION_BACK = 'gllry-back';
+    ANIMATION_FWD = 'gllry-fwd';
 
     function Gllry(id, options){
         var self = this;
@@ -104,9 +104,9 @@
             this.next = 0;
         }
 
-        if(this.gllry.querySelector('.next')){ this.gllry.querySelector('.next').classList.remove('next');}
+        if(this.gllry.querySelector('.gllry-next')){ this.gllry.querySelector('.gllry-next').classList.remove('gllry-next');}
         if(this.items[this.next]){
-            this.items[this.next].classList.add('next');
+            this.items[this.next].classList.add('gllry-next');
         }
         
         if(this.options.animate){
@@ -128,9 +128,9 @@
             this.next = this.max-1;
         }
 
-        if(this.gllry.querySelector('.next')){ this.gllry.querySelector('.next').classList.remove('next');}
+        if(this.gllry.querySelector('.gllry-next')){ this.gllry.querySelector('.gllry-next').classList.remove('gllry-next');}
         if(this.items[this.next]){
-            this.items[this.next].classList.add('next');
+            this.items[this.next].classList.add('gllry-next');
         }
 
         if(this.options.animate){
@@ -170,19 +170,21 @@
         this.nav_buttons = document.createElement('ul');
         this.nav_buttons.classList.add('nav_buttons');
 
+        this.nav_buttons.addEventListener(this.touchend, function(e){
+            if(e.target.classList.contains('gllry-fwd')){
+                _this.goNext();
+            }
+            else{
+                _this.goPrev();   
+            }
+        });
+
         var liBack = document.createElement('li');
-        liBack.classList.add('back');
+        liBack.classList.add('gllry-back');
         this.nav_buttons.appendChild(liBack);
 
-        liBack.addEventListener(this.touchend, function(){
-            _this.goPrev();
-        });
-
         var liFwd = document.createElement('li');
-        liFwd.classList.add('fwd');
-        liFwd.addEventListener(this.touchend, function(){
-            _this.goNext();
-        });
+        liFwd.classList.add('gllry-fwd');
         this.nav_buttons.appendChild(liFwd);
 
         this.gllry.appendChild(this.nav_buttons);
@@ -231,7 +233,7 @@
         var self = this;
 
         if(this.gllry.querySelector('.current')){ this.gllry.querySelector('.current').classList.remove('current');}
-        if(this.gllry.querySelector('.next')){ this.gllry.querySelector('.next').classList.remove('next');}
+        if(this.gllry.querySelector('.gllry-next')){ this.gllry.querySelector('.gllry-next').classList.remove('gllry-next');}
         if(this.breadcrumbs.querySelector('.current')) this.breadcrumbs.querySelector('.current').classList.remove('current');
         if(this.actionButton) this.actionButton.classList.remove('show');
 
@@ -240,7 +242,7 @@
         }
 
         if(this.items[this.next]){
-            this.items[this.next].classList.add('next');
+            this.items[this.next].classList.add('gllry-next');
         }
 
         this.breadcrumbs.children[this.current].classList.add('current');
